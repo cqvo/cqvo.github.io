@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Iframe Content</title>
+    <script>
+      window.addEventListener('message', receiveMessage, false);
+      function receiveMessage(event) {
+        // Check the origin of the message
+        console.log('Message from: ', event.origin);
+        if (event.origin !== 'https://parent.example.com') {
+          // Ensure that messages are accepted only from a specific origin to avoid security risks
+          return;
+        }
+        // 'event.data' contains the message sent from the parent window
+        const messageDisplay = document.getElementById('messageDisplay');
+        messageDisplay.textContent = event.data;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Iframe Content</h1>
+    <p id="messageDisplay">Waiting for message...</p>
+  </body>
+</html>
