@@ -40,10 +40,11 @@
     <script>
         const sendMessageToParentBtn = document.getElementById('sendMessageToParentBtn');
         const receivedMessageFromParent = document.getElementById('receivedMessageFromParent');
-        const classyDeviceId = window.mParticle.getDeviceId();
 
         sendMessageToParentBtn.addEventListener('click', () => {
             // Send message to the parent window
+            let classyDeviceId = window.mParticle.getDeviceId();
+            console.log('Sending message to parent: classyDeviceId=' + classyDeviceId);
             window.parent.postMessage({classyDeviceId: classyDeviceId}, 'https://github.io');
         });
     </script>
