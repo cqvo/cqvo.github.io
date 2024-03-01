@@ -46,19 +46,6 @@
             // Send message to the parent window
             window.parent.postMessage({classyDeviceId: classyDeviceId}, 'https://github.io');
         });
-
-        window.addEventListener('message', receiveMessageFromParent, false);
-
-        function receiveMessageFromParent(event) {
-            // Check the origin of the message
-            if (event.origin !== 'https://parent.example.com') {
-                // Ensure that messages are accepted only from a specific origin to avoid security risks
-                return;
-            }
-
-            // Display message received from the parent window
-            receivedMessageFromParent.textContent = 'Received message from parent: ' + event.data;
-        }
     </script>
 </body>
 </html>
