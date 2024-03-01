@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Iframe Content</title>
-    <script>
-      window.addEventListener('message', receiveMessage, false);
-      function receiveMessage(event) {
-        // Check the origin of the message
-        console.log('Message from: ', event.origin);
-        if (event.origin !== 'https://parent.example.com') {
-          // Ensure that messages are accepted only from a specific origin to avoid security risks
-          return;
-        }
-        // 'event.data' contains the message sent from the parent window
-        const messageDisplay = document.getElementById('messageDisplay');
-        messageDisplay.textContent = event.data;
-      }
-    </script>
-  </head>
-  <body>
+</head>
+<body>
     <h1>Iframe Content</h1>
-    <p id="messageDisplay">Waiting for message..</p>
-  </body>
+    <button id="sendMessageToParentBtn">Send Message to Parent</button>
+    <p id="receivedMessageFromParent"></p>
+
+    <script>
+        const sendMessageToParentBtn = document.getElementById('sendMessageToParentBtn');
+        const receivedMessageFromParent = document.getElementById('receivedMessageFromParent');
+
+        sendMessageToParentBtn.addEventListener('click', () => {
+            // Send message to the parent window
+            window.parent.postMessage('Hello from iframe!', 'https://parent.example.com');
+        });
+
+        window.addEventListener('message', receiveMessageFromParent, false);
+
+        function receiveMessageFromParent(event) {
+            // Check the origin of the message
+            if (event.origin !== 'https://parent.example.com') {
+                // Ensure that messages are accepted only from a specific origin to avoid security risks
+                return;
+            }
+
+            // Display message received from the parent window
+            receivedMessageFromParent.textContent = 'Received message from parent: ' + event.data;
+        }
+    </script>
+</body>
 </html>
