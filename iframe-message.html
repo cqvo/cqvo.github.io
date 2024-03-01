@@ -34,10 +34,10 @@
     <script>
         window.mParticle.ready(
             function() {
-                console.log('mParticle ready!');
+                console.log('INNER FRAME - mParticle ready!');
                 let classyDeviceId = window.mParticle.getDeviceId();
-                console.log('classyDeviceId: ' + classyDeviceId);
-                window.parent.postMessage({classyDeviceId: classyDeviceId}, 'https://github.io');
+                console.log('INNER FRAME - classyDeviceId: ' + classyDeviceId);
+                try{window.parent.postMessage({classyDeviceId: classyDeviceId}, 'https://github.io');console.log('INNER FRAME - postMessage() sent');}
             }
             );
     </script>
