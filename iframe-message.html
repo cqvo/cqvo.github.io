@@ -21,7 +21,7 @@
           },
           dataPlan: {
             planId: 'test_plan',
-            // planVersion: 2
+            planVersion: 1,
           }
       },
   };
@@ -37,7 +37,10 @@
                 console.log('INNER FRAME - mParticle ready!');
                 let classyDeviceId = window.mParticle.getDeviceId();
                 console.log('INNER FRAME - classyDeviceId: ' + classyDeviceId);
-                try{window.parent.postMessage({classyDeviceId: classyDeviceId}, 'https://github.io');console.log('INNER FRAME - postMessage() sent');}
+                try{
+	window.parent.postMessage({classyDeviceId: classyDeviceId}, 'https://github.io');
+	console.log('INNER FRAME - postMessage() sent');
+} catch(Exception e) {console.log(error);}
             }
             );
     </script>
