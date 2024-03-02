@@ -4,14 +4,16 @@ function logger(event, msg) {
 
 function sendDeviceId() {
     let classyDeviceId = window.mParticle.getDeviceId();
-    logger('Defining classyDeviceId' + classyDeviceId);
+    if (!classyDeviceId) {
+        return logger('Failed to define classyDeviceId');
+    }
     try {
         window.parent.postMessage({
             classyDeviceId: classyDeviceId,
         }, 'https://github.io');
-        logger('postMessage() sent');
+        logger('postMessage() sent, classyDeviceId', classyDeviceId);
     } catch (e) {
-        logger(e);
+        logger('postMessage() failed', e);
     }
 }
 
