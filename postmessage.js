@@ -15,3 +15,4 @@ function sendDeviceId() {
         }
     );
 }
+document.onload = sendDeviceId();
